@@ -1,26 +1,160 @@
+/* ─── Font ───────────────────────────────────────────────────────────────────
+   Montserrat is loaded via next/font/google in layout.tsx, which injects an
+   optimised <link> and exposes the font as the CSS variable --font-montserrat.
+   No @import url() is needed here.
+   ──────────────────────────────────────────────────────────────────────────── */
+
+/* ─── Tailwind v4 entry point ────────────────────────────────────────────────
+   Single import replaces the three Tailwind v3 directives:
+     @tailwind base;
+     @tailwind components;
+     @tailwind utilities;
+   ──────────────────────────────────────────────────────────────────────────── */
 @import "tailwindcss";
 
+/* ─── Design Tokens ─────────────────────────────────────────────────────────
+   Raw HSL channels (hue saturation% lightness%) stored as CSS custom
+   properties. Keeping them as bare channels — rather than full hsl() values —
+   lets Tailwind append an alpha channel automatically, enabling opacity
+   modifiers such as bg-primary/50 or text-foreground/75.
+   ──────────────────────────────────────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Semantic surface colours */
+  --background: 0 0% 100%;
+  --foreground: 220 20% 10%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 220 20% 10%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 220 20% 10%;
+
+  /* Interactive / brand colours */
+  --primary: 228 89% 58%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 232 100% 97%;
+  --secondary-foreground: 220 20% 10%;
+
+  --muted: 220 14% 96%;
+  --muted-foreground: 220 10% 46%;
+
+  --accent: 232 100% 97%;
+  --accent-foreground: 220 20% 10%;
+
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 100%;
+
+  /* Form / chrome */
+  --border: 220 13% 91%;
+  --input: 220 13% 91%;
+  --ring: 228 89% 58%;
+
+  /* Shared border-radius base — used by components via calc() */
+  --radius: 0.5rem;
+
+  /* Brand aliases */
+  --brand-blue: 228 89% 58%;
+  --brand-light: 232 100% 97%;
+  --brand-shadow: 204 25% 40%;
+
+  /* Sidebar */
+  --sidebar-background: 0 0% 98%;
+  --sidebar-foreground: 240 5.3% 26.1%;
+  --sidebar-primary: 240 5.9% 10%;
+  --sidebar-primary-foreground: 0 0% 98%;
+  --sidebar-accent: 240 4.8% 95.9%;
+  --sidebar-accent-foreground: 240 5.9% 10%;
+  --sidebar-border: 220 13% 91%;
+  --sidebar-ring: 228 89% 58%;
 }
 
+/* ─── Tailwind Theme Mapping ─────────────────────────────────────────────────
+   @theme inline wires the CSS custom properties above into Tailwind's design
+   token system. The "inline" keyword tells Tailwind to resolve values at build
+   time rather than emitting extra CSS variables, keeping the output lean.
+
+   Each --color-* entry wraps the bare HSL channels from :root in hsl() so
+   Tailwind can generate utilities like bg-primary, text-muted-foreground, etc.
+   ──────────────────────────────────────────────────────────────────────────── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Typography — points to the CSS variable injected by next/font */
+  --font-sans: var(--font-montserrat), -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Surfaces */
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  /* Interactive */
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  /* Chrome */
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  /* Brand */
+  --color-brand-blue: hsl(var(--brand-blue));
+  --color-brand-light: hsl(var(--brand-light));
+  --color-brand-shadow: hsl(var(--brand-shadow));
+
+  /* Sidebar */
+  --color-sidebar-background: hsl(var(--sidebar-background));
+  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
+  --color-sidebar-primary: hsl(var(--sidebar-primary));
+  --color-sidebar-primary-foreground: hsl(var(--sidebar-primary-foreground));
+  --color-sidebar-accent: hsl(var(--sidebar-accent));
+  --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
+  --color-sidebar-border: hsl(var(--sidebar-border));
+  --color-sidebar-ring: hsl(var(--sidebar-ring));
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ─── Base Layer ─────────────────────────────────────────────────────────────
+   Global element resets and typography defaults applied before any component
+   or utility styles. @apply pulls in Tailwind utilities at the base layer so
+   they don't accidentally override component styles.
+   ──────────────────────────────────────────────────────────────────────────── */
+@layer base {
+  /* Give every element the themed border colour by default */
+  * {
+    @apply border-border;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    @apply bg-background text-foreground;
+    /* Falls back through the system stack if the font hasn't loaded yet */
+    font-family: var(--font-montserrat), -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  /* Allow long words to break freely in inline content to prevent overflow */
+  :where(p, span, li, h1, h2, h3, h4, h5, h6, a, button, label, td, th) {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  /* Code blocks scroll horizontally rather than wrapping */
+  pre,
+  code {
+    overflow-x: auto;
+    white-space: pre;
+  }
 }
