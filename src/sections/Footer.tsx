@@ -27,7 +27,7 @@ export default function Footer() {
               <ul className="flex flex-col gap-3">
                 {["AI Caption", "Text to Video", "Video to Reels", "Script Downloader", "Text to Speech"].map((item) => (
                   <li key={item}>
-                    <Link to="/features" className="text-sm text-white/60 hover:text-white transition-colors duration-200">{item}</Link>
+                    <Link href="/features" className="text-sm text-white/60 hover:text-white transition-colors duration-200">{item}</Link>
                   </li>
                 ))}
               </ul>
@@ -39,7 +39,7 @@ export default function Footer() {
               <ul className="flex flex-col gap-3">
                 {["AI Gallery", "Feature Requests"].map((item) => (
                   <li key={item}>
-                    <Link to="/features" className="text-sm text-white/60 hover:text-white transition-colors duration-200">{item}</Link>
+                    <Link href="/features" className="text-sm text-white/60 hover:text-white transition-colors duration-200">{item}</Link>
                   </li>
                 ))}
               </ul>
@@ -51,7 +51,7 @@ export default function Footer() {
               <ul className="flex flex-col gap-3">
                 {["Blog", "FAQ"].map((item) => (
                   <li key={item}>
-                    <Link to="/about" className="text-sm text-white/60 hover:text-white transition-colors duration-200">{item}</Link>
+                    <Link href="/about" className="text-sm text-white/60 hover:text-white transition-colors duration-200">{item}</Link>
                   </li>
                 ))}
               </ul>
