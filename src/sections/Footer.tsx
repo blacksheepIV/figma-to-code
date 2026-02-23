@@ -1,5 +1,5 @@
 import Container from '@/components/ui/Container'
-
+import Link from 'next/link'
 export default function Footer() {
   return (
          <footer className="bg-black text-white">
@@ -68,7 +68,7 @@ export default function Footer() {
                   { label: "Privacy Policy", to: "/about" },
                 ].map((item) => (
                   <li key={item.label}>
-                    <Link to={item.to} className="text-sm text-white/60 hover:text-white transition-colors duration-200">{item.label}</Link>
+                    <Link href={item.to} className="text-sm text-white/60 hover:text-white transition-colors duration-200">{item.label}</Link>
                   </li>
                 ))}
               </ul>
