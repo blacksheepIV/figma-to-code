@@ -3,7 +3,7 @@ import Link from 'next/link'
 export default function Header() {
   return (
     <header className="w-full bg-white shadow-header sticky top-0 z-50">
-      <Container className="flex h-16 items-center justify-between">
+      
       <div className="max-w-[1440px] mx-auto px-5 h-[60px] flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5">
@@ -25,7 +25,7 @@ export default function Header() {
           </Link>
         </div>
         </div>
-      </Container>
+      
     </header>
     
        
